@@ -5,8 +5,9 @@ static NSString *const LeftSideGesture = @"LeftSideGesture";
 static NSString *const RightSideGesture = @"RightSideGesture";
 static NSString *const GestureHUD = @"GestureHUD";
 
-@interface YTPlayerViewController (YouModGestures)
+@interface YTMainAppVideoPlayerOverlayViewController (YouModGestures) <UIGestureRecognizerDelegate>
 @property (nonatomic, retain) UILabel *YouModGestureHUD;
+@property (nonatomic, retain) UIPanGestureRecognizer *YouModPanGesture;
 @end
 
 %hook YTMainAppControlsOverlayView
@@ -345,24 +346,16 @@ static NSString *const GestureHUD = @"GestureHUD";
 
 // Gestures - @bhackel (YTLitePlus)
 %group Gestures
-%hook YTWatchLayerViewController
-// invoked when the player view controller is either created or destroyed
-- (void)watchController:(YTWatchController *)watchController didSetPlayerViewController:(YTPlayerViewController *)playerViewController {
-    if (playerViewController) {
-        // check to see if the pan gesture is already created
-        if (!playerViewController.YouModPanGesture) {
-            playerViewController.YouModPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:playerViewController action:@selector(YouModHandlePanGesture:)];
-            playerViewController.YouModPanGesture.delegate = playerViewController;
-            [playerViewController.playerView addGestureRecognizer:playerViewController.YouModPanGesture];
-        }        
-    }
-    %orig;
-}
-%end
+%hook YTMainAppVideoPlayerOverlayViewController
 
-%hook YTPlayerViewController
-%property (nonatomic, retain) UIPanGestureRecognizer *YouModPanGesture;
-%property (nonatomic, retain) UILabel *YouModGestureHUD;
+- (void)viewDidLoad {
+    %orig;
+    if (!self.YouModPanGesture) {
+        self.YouModPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(YouModHandlePanGesture:)];
+        self.YouModPanGesture.delegate = self;
+        [self.view addGestureRecognizer:self.YouModPanGesture];
+    }
+}
 
 %new
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
