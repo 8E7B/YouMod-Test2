@@ -347,6 +347,8 @@ static NSString *const GestureHUD = @"GestureHUD";
 // Gestures - @bhackel (YTLitePlus)
 %group Gestures
 %hook YTMainAppVideoPlayerOverlayViewController
+%property (nonatomic, retain) UIPanGestureRecognizer *YouModPanGesture;
+%property (nonatomic, retain) UILabel *YouModGestureHUD;
 
 - (void)viewDidLoad {
     %orig;
