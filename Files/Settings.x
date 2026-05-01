@@ -2,6 +2,11 @@
 // Thanks to the original codes from YTUHD by PoomSmart - https://github.com/PoomSmart/YTUHD/blob/0e735616fd8fc6546339da7fdc78466f16f23ffd/Settings.x
 #import "Headers.h"
 
+static NSString *const GestureActivationArea = @"GestureActivationArea";
+static NSString *const LeftSideGesture = @"LeftSideGesture";
+static NSString *const RightSideGesture = @"RightSideGesture";
+static NSString *const GestureHUD = @"GestureHUD";
+
 #define TweakName @"YouMod"
 
 #define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
@@ -138,7 +143,6 @@ static NSString *GetCacheSize() { // YTLite - @dayanch96
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
             return [%c(YTUIUtils) openURL:[NSURL URLWithString:@"https://github.com/Tonwalter888/YouMod/issues/new/choose"]];
-            return [%c(YTUIUtils) openURL:[NSURL URLWithString:@"https://github.com/8e7b/YouMod-Test2/issues/new/choose"]];
         }
     ];
     [sectionItems addObject:issues];
@@ -150,7 +154,6 @@ static NSString *GetCacheSize() { // YTLite - @dayanch96
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
             return [%c(YTUIUtils) openURL:[NSURL URLWithString:@"https://github.com/Tonwalter888/YouMod"]];
-            return [%c(YTUIUtils) openURL:[NSURL URLWithString:@"https://github.com/8e7b/YouMod-Test2"]];
         }
     ];
     [sectionItems addObject:sourceCodes];
