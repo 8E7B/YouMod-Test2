@@ -5,11 +5,6 @@ static NSString *const LeftSideGesture = @"LeftSideGesture";
 static NSString *const RightSideGesture = @"RightSideGesture";
 static NSString *const GestureHUD = @"GestureHUD";
 
-@interface YTPlayerViewController (YouMod)
-@property (nonatomic, retain) UIPanGestureRecognizer *YouModPanGesture;
-@property (nonatomic, retain) UILabel *YouModGestureHUD;
-@end
-
 %hook YTMainAppControlsOverlayView
 // Hide autoplay Switch
 - (void)setAutoplaySwitchButtonRenderer:(id)arg1 { if (!IS_ENABLED(HideAutoPlayToggle)) %orig; }
