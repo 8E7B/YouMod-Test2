@@ -236,8 +236,8 @@ jobs:
         id: cache-openyt
         uses: actions/cache@v5
         with:
-          path: OpenYouTubeSafariExtension
-          key: OpeninYT-${{ env.OPENYT_COMMIT }}
+        path: OpenYouTubeSafariExtension.appex
+        key: OpeninYT-v2-${{ env.OPENYT_COMMIT }}
 
       - name: Clone Open in YouTube (Safari Extension)
         if: ${{ steps.cache-openyt.outputs.cache-hit != 'true' }}
